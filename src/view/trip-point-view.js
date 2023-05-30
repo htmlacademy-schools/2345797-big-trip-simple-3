@@ -62,4 +62,14 @@ export default class TripPointView extends AbstractView {
   get template() {
     return createTripPointTemplate(this.#point);
   }
+
+  setClickOpenEditorHandler = (callback) => {
+    this._callback.clickOpenEditor = callback;
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#clickOpenEditor);
+  };
+
+  #clickOpenEditor = (evt) => {
+    evt.preventDefault();
+    this._callback.clickOpenEditor();
+  };
 }

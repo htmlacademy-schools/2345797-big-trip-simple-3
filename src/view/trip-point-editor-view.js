@@ -116,4 +116,24 @@ export default class TripPointEditorView extends AbstractView {
   get template() {
     return createTripPointEditorTemplate(this.#point);
   }
+
+  setFormSubmitHandler = (callback) => {
+    this._callback.formSubmit = callback;
+    this.element.querySelector('form').addEventListener('submit', this.#formSubmitHandler);
+  };
+
+  #formSubmitHandler = (evt) => {
+    evt.preventDefault();
+    this._callback.formSubmit();
+  };
+
+  setCloseClickHandler = (callback) => {
+    this._callback.closeClick = callback;
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#closeClickHandler);
+  };
+
+  #closeClickHandler = (evt) => {
+    evt.preventDefault();
+    this._callback.closeClick();
+  };
 }
