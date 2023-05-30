@@ -1,4 +1,4 @@
-import { createElement } from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 import { POINT_TYPES } from '../const.js';
 import { humanizePointEditorDueDate } from '../utils.js';
 import { generateOffer } from '../mock/offer.js';
@@ -105,27 +105,15 @@ const createTripPointEditorTemplate = (point) => {
 </li>`;
 };
 
-export default class TripPointEditorView {
+export default class TripPointEditorView extends AbstractView {
   #point = null;
-  #element = null;
 
   constructor(point) {
+    super();
     this.#point = point;
   }
 
-  get #template() {
+  get template() {
     return createTripPointEditorTemplate(this.#point);
-  }
-
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.#template);
-    }
-
-    return this.#element;
-  }
-
-  removeElement() {
-    this.#element = null;
   }
 }
