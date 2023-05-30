@@ -3,7 +3,7 @@ import TripPointView from '../view/trip-point-view';
 // import TripPointCreatorView from '../view/trip-point-creator-view';
 import TripPointEditorView from '../view/trip-point-editor-view';
 import SortView from '../view/sort-view.js';
-import { render } from '../framework/render.js';
+import { render, replace } from '../framework/render.js';
 import EmptyListView from '../view/trip-list-empty-view';
 
 export default class PointListPresenter {
@@ -38,29 +38,21 @@ export default class PointListPresenter {
     const tripPointComponent = new TripPointView(point);
     const tripEditPointComponent = new TripPointEditorView(point);
 
-    const replaceCardToForm = () => {
-      this.#pointListComponent.element.replaceChild(tripEditPointComponent.element, tripPointComponent.element);
-    };
-
-    const replaceFormToCard = () => {
-      this.#pointListComponent.element.replaceChild(tripPointComponent.element, tripEditPointComponent.element);
-    };
-
     const onEscKeyDown = (evt) => {
       if (evt.key === 'Escape' || evt.key === 'Esc') {
         evt.preventDefault();
-        replaceFormToCard();
+        replace(tripPointComponent, tripEditPointComponent);
         document.removeEventListener('keydown', onEscKeyDown);
       }
     };
 
     const closeTripPointEditor = () => {
-      replaceFormToCard();
+      replace(tripPointComponent, tripEditPointComponent);
       document.removeEventListener('keydown', onEscKeyDown);
     };
 
     tripPointComponent.setClickOpenEditorHandler(() => {
-      replaceCardToForm();
+      replace(tripEditPointComponent, tripPointComponent);
       document.addEventListener('keydown', onEscKeyDown);
     });
 
