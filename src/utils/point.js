@@ -1,7 +1,5 @@
 import dayjs from 'dayjs';
 
-const getRadomNumber = (start, end) =>
-  Math.round(Math.random() * (end - start) + start);
 const humanizePointEditorDueDate = (dueDate) => dayjs(dueDate).format('DD/MM/YY HH:mm');
 const humanizePointDueDate = (dueData) => dayjs(dueData).format('MMMM DD');
 const getDateForDateTimeWithoutTime = (dueData) => dayjs(dueData).format('YYYY-MM-DD');
@@ -9,4 +7,4 @@ const getDateForDateTimeWithTime = (dueData) => dayjs(dueData).format('YYYY-MM-D
 const getTimeFromDateTime = (data) => data.slice(-5);
 
 export { humanizePointEditorDueDate, humanizePointDueDate, getDateForDateTimeWithoutTime,
-  getDateForDateTimeWithTime, getTimeFromDateTime, getRadomNumber };
+  getDateForDateTimeWithTime, getTimeFromDateTime };

@@ -1,6 +1,6 @@
 import AbstractView from '../framework/view/abstract-view.js';
 import { humanizePointDueDate, getDateForDateTimeWithoutTime,
-  getDateForDateTimeWithTime, getTimeFromDateTime } from '../utils.js';
+  getDateForDateTimeWithTime, getTimeFromDateTime } from '../utils/point.js';
 import { generateOffer } from '../mock/offer.js';
 import { generateDestination } from '../mock/destination.js';
 

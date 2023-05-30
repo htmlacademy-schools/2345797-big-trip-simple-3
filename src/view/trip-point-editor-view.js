@@ -1,6 +1,6 @@
 import AbstractView from '../framework/view/abstract-view.js';
 import { POINT_TYPES } from '../const.js';
-import { humanizePointEditorDueDate } from '../utils.js';
+import { humanizePointEditorDueDate } from '../utils/point.js';
 import { generateOffer } from '../mock/offer.js';
 import { generateDestination } from '../mock/destination.js';
 
