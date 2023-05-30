@@ -12,11 +12,17 @@ export default class PointListPresenter {
   #pointsModel = null;
   #pointListPoints = [];
 
-  init(pointListContainer, pointsModel) {
+  constructor(pointListContainer, pointsModel){
     this.#pointListContainer = pointListContainer;
     this.#pointsModel = pointsModel;
-    this.#pointListPoints = [...this.#pointsModel.points];
+  }
 
+  init = () => {
+    this.#pointListPoints = [...this.#pointsModel.points];
+    this.#renderTripList();
+  };
+
+  #renderTripList = () => {
     if (this.#pointListPoints.length === 0) {
       render(new EmptyListView(), this.#pointListContainer);
       return;
@@ -26,7 +32,7 @@ export default class PointListPresenter {
     this.#pointListPoints.forEach((point) => {
       this.#renderPoint(point);
     });
-  }
+  };
 
   #renderPoint = (point) => {
     const tripPointComponent = new TripPointView(point);
