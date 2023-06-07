@@ -5,6 +5,8 @@ import { render } from '../framework/render.js';
 import EmptyListView from '../view/trip-list-empty-view';
 import PointPresenter from './point-presenter.js';
 import { updateItem } from '../utils/utils.js';
+import { SortType } from '../const';
+import { sortPointDay, sortPointPrice } from '../utils/point';
 
 export default class PointListPresenter {
   #pointListComponent = new TripListView();
@@ -14,6 +16,7 @@ export default class PointListPresenter {
   #pointsModel = null;
   #pointListPoints = [];
   #pointPresenter = new Map();
+  #currentSortType = SortType.DAY;
 
   constructor(pointListContainer, pointsModel){
     this.#pointListContainer = pointListContainer;
@@ -34,8 +37,32 @@ export default class PointListPresenter {
     this.#pointPresenter.get(updatedPoint.id).init(updatedPoint);
   };
 
+  #sortPoints = (sortType) => {
+    switch (sortType) {
+      case SortType.DAY:
+        this.#pointListPoints.sort(sortPointDay);
+        break;
+      case SortType.PRICE:
+        this.#pointListPoints.sort(sortPointPrice);
+        break;
+    }
+
+    this.#currentSortType = sortType;
+  };
+
+  #handleSortTypeChange = (sortType) => {
+    if (this.#currentSortType === sortType) {
+      return;
+    }
+
+    this.#sortPoints(sortType);
+    this.#clearPointList();
+    this.#renderPointList();
+  };
+
   #renderSort = () => {
     render(this.#sortComponent, this.#pointListContainer);
+    this.#sortComponent.setSortTypeChangeHandler(this.#handleSortTypeChange);
   };
 
   #renderNoPoint = () => {
