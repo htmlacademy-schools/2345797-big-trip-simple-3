@@ -86,19 +86,19 @@ export default class PointPresenter {
   };
 
   #handleFormSubmit = (point) => {
+    const isMinorUpdate = !isDatesEqual(this.#point.dateFrom, point.dateFrom) || this.#point.basePrice !== point.basePrice;
     this.#changeData(
       UserAction.UPDATE_POINT,
-      UpdateType.MINOR,
+      isMinorUpdate ? UpdateType.MINOR : UpdateType.PATCH,
       point,
     );
     this.#replaceFormToCard();
   };
 
   #handleDeleteClick = (point) => {
-    const isMinorUpdate = !isDatesEqual(this.#point.dateFrom, point.dateFrom) || this.#point.basePrice !== point.basePrice;
     this.#changeData(
       UserAction.DELETE_POINT,
-      isMinorUpdate ? UpdateType.MINOR : UpdateType.PATCH,
+      UpdateType.MINOR,
       point,
     );
   };
