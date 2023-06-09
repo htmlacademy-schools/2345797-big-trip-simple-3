@@ -270,7 +270,7 @@ export default class TripPointEditView extends AbstractStatefulView {
     this.element.querySelector('.event__input--destination')
       .addEventListener('change', this.#destinationChangedHandler);
     this.element.querySelector('.event__input--price')
-      .addEventListener('change', this.#basedPriceChangeHandler);
+      .addEventListener('input', this.#basedPriceChangeHandler);
     if (this._state.isOffers) {
       this.element.querySelector('.event__available-offers')
         .addEventListener('change', this.#offersChangedHandler);
