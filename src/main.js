@@ -1,9 +1,7 @@
-import { render } from './framework/render.js';
-import FilterView from './view/filter-view.js';
 import PointListPresenter from './presenter/point-list-presenter.js';
 import PointsModel from './model/points-model.js';
 import FilterModel from './model/filter-model.js';
-import { FilterType } from './const.js';
+import FilterPresenter from './presenter/filter-presenter.js';
 
 const tripControlsFiltersElement = document.querySelector('.trip-controls__filters');
 const tripEventsElement = document.querySelector('.trip-events');
@@ -11,7 +9,7 @@ const tripEventsElement = document.querySelector('.trip-events');
 const pointsModel = new PointsModel();
 const filterModel = new FilterModel();
 const pointListPresenter = new PointListPresenter(tripEventsElement, pointsModel);
+const filterPresenter = new FilterPresenter(tripControlsFiltersElement, filterModel, pointsModel);
 
-render(new FilterView(FilterType.EVERYTHING), tripControlsFiltersElement);
-
+filterPresenter.init();
 pointListPresenter.init();
