@@ -6,9 +6,10 @@ const getDateForDateTimeWithoutTime = (dueData) => dayjs(dueData).format('YYYY-M
 const getDateForDateTimeWithTime = (dueData) => dayjs(dueData).format('YYYY-MM-DDTHH:mm');
 const getTimeFromDateTime = (data) => data.slice(-5);
 
+const isFuture = (date) => date && (dayjs().isBefore(date, 'D'));
 const sortPointDay = (pointA, pointB) => dayjs(pointA.dateFrom).diff(dayjs(pointB.dateFrom));
 const sortPointPrice = (pointA, pointB) => pointB.basePrice - pointA.basePrice;
 const isDatesEqual = (dateA, dateB) => (!dateA && !dateB) || dayjs(dateA).isSame(dateB, 'D');
 
 export { humanizePointEditorDueDate, humanizePointDueDate, getDateForDateTimeWithoutTime,
-  getDateForDateTimeWithTime, getTimeFromDateTime, sortPointDay, sortPointPrice, isDatesEqual };
+  getDateForDateTimeWithTime, getTimeFromDateTime, sortPointDay, sortPointPrice, isDatesEqual, isFuture };

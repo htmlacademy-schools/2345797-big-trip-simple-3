@@ -8,7 +8,7 @@ const tripEventsElement = document.querySelector('.trip-events');
 
 const pointsModel = new PointsModel();
 const filterModel = new FilterModel();
-const pointListPresenter = new PointListPresenter(tripEventsElement, pointsModel);
+const pointListPresenter = new PointListPresenter(tripEventsElement, pointsModel, filterModel);
 const filterPresenter = new FilterPresenter(tripControlsFiltersElement, filterModel, pointsModel);
 
 filterPresenter.init();
