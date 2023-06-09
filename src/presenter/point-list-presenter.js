@@ -97,7 +97,6 @@ export default class PointListPresenter {
     this.#uiBlocker.block();
     switch (actionType) {
       case UserAction.UPDATE_POINT:
-        //this.#pointPresenter.get(update.id).setSaving();
         this.#pointPresenter.get(update.id).setSaving();
         try {
           await this.#pointsModel.updatePoint(updateType, update);
@@ -106,7 +105,6 @@ export default class PointListPresenter {
         }
         break;
       case UserAction.ADD_POINT:
-        //this.#pointNewPresenter.setSaving();
         this.#pointNewPresenter.setSaving();
         try {
           await this.#pointsModel.addPoint(updateType, update);
@@ -115,7 +113,6 @@ export default class PointListPresenter {
         }
         break;
       case UserAction.DELETE_POINT:
-        //this.#pointPresenter.get(update.id).setDeleting();
         this.#pointPresenter.get(update.id).setDeleting();
         try {
           await this.#pointsModel.deletePoint(updateType, update);

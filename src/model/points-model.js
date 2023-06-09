@@ -1,5 +1,6 @@
 import Observable from '../framework/observable.js';
 import { UpdateType } from '../const.js';
+import { isFuture } from '../utils/point.js';
 
 export default class PointsModel extends Observable {
   #pointsApiService = null;
@@ -77,6 +78,7 @@ export default class PointsModel extends Observable {
     }
   }
 
+  checkSomePointsInFuture = () => this.#points.some((point) => isFuture(point.dateFrom));
 
   #adaptToClient(point) {
     const adaptedPoint = {...point,
