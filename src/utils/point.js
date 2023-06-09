@@ -8,6 +8,7 @@ const getTimeFromDateTime = (data) => data.slice(-5);
 
 const sortPointDay = (pointA, pointB) => dayjs(pointA.dateFrom).diff(dayjs(pointB.dateFrom));
 const sortPointPrice = (pointA, pointB) => pointB.basePrice - pointA.basePrice;
+const isDatesEqual = (dateA, dateB) => (!dateA && !dateB) || dayjs(dateA).isSame(dateB, 'D');
 
 export { humanizePointEditorDueDate, humanizePointDueDate, getDateForDateTimeWithoutTime,
-  getDateForDateTimeWithTime, getTimeFromDateTime, sortPointDay, sortPointPrice };
+  getDateForDateTimeWithTime, getTimeFromDateTime, sortPointDay, sortPointPrice, isDatesEqual };

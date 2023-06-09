@@ -22,6 +22,10 @@ export default class PointListPresenter {
     this.#pointsModel.addObserver(this.#handleModelEvent);
   }
 
+  init = () => {
+    this.#renderPointList();
+  };
+
   get points () {
     switch (this.#currentSortType) {
       case SortType.DAY:
@@ -32,10 +36,6 @@ export default class PointListPresenter {
 
     return this.#pointsModel.points;
   }
-
-  init = () => {
-    this.#renderPointList();
-  };
 
   #handleModeChange = () => {
     this.#pointPresenter.forEach((presenter) => presenter.resetView());
@@ -86,18 +86,6 @@ export default class PointListPresenter {
     render(this.#sortComponent, this.#pointListComponent.element, RenderPosition.AFTERBEGIN);
   };
 
-  #renderNoPoint = () => {
-    render(this.#noPointComponent, this.#pointListContainer);
-  };
-
-  #renderPointListComponent = () => {
-    render(this.#pointListComponent, this.#pointListContainer);
-  };
-
-  #renderPoints = (points) => {
-    points.forEach((point) => this.#renderPoint(point));
-  };
-
   #clearPointList = ({resetSortType = false} = {}) => {
     this.#pointPresenter.forEach((presenter) => presenter.destroy());
     this.#pointPresenter.clear();
@@ -119,6 +107,18 @@ export default class PointListPresenter {
     this.#renderSort();
     this.#renderPointListComponent();
     this.#renderPoints(this.points);
+  };
+
+  #renderNoPoint = () => {
+    render(this.#noPointComponent, this.#pointListContainer);
+  };
+
+  #renderPointListComponent = () => {
+    render(this.#pointListComponent, this.#pointListContainer);
+  };
+
+  #renderPoints = (points) => {
+    points.forEach((point) => this.#renderPoint(point));
   };
 
   #renderPoint = (point) => {
