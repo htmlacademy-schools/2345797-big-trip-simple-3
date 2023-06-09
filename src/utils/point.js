@@ -10,6 +10,7 @@ const isFuture = (date) => date && (dayjs().isBefore(date, 'D'));
 const sortPointDay = (pointA, pointB) => dayjs(pointA.dateFrom).diff(dayjs(pointB.dateFrom));
 const sortPointPrice = (pointA, pointB) => pointB.basePrice - pointA.basePrice;
 const isDatesEqual = (dateA, dateB) => (!dateA && !dateB) || dayjs(dateA).isSame(dateB, 'D');
+const isFutureThen = (dateA, dateB) => dayjs(dateA).isAfter(dayjs(dateB));
 
 export { humanizePointEditorDueDate, humanizePointDueDate, getDateForDateTimeWithoutTime,
-  getDateForDateTimeWithTime, getTimeFromDateTime, sortPointDay, sortPointPrice, isDatesEqual, isFuture };
+  getDateForDateTimeWithTime, getTimeFromDateTime, sortPointDay, sortPointPrice, isDatesEqual, isFuture, isFutureThen };
