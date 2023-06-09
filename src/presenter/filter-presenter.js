@@ -5,22 +5,22 @@ import {UpdateType} from '../const.js';
 export default class FilterPresenter {
   #filterContainer = null;
   #filterModel = null;
-  #tasksModel = null;
+  #pointModel = null;
   #filterComponent = null;
 
-  constructor(filterContainer, filterModel, tasksModel) {
+  constructor(filterContainer, filterModel, pointModel) {
     this.#filterContainer = filterContainer;
     this.#filterModel = filterModel;
-    this.#tasksModel = tasksModel; // TODO: В рефакторе чекнуть, нужно ли сейвить таск модел
+    this.#pointModel = pointModel;
 
-    this.#tasksModel.addObserver(this.#handleModelEvent);
-    this.#filterModel.addObserver(this.#handleModelEvent); // TODO: Глянуть, а нужно ли нам фильтры обновлять
+    this.#pointModel.addObserver(this.#handleModelEvent);
+    this.#filterModel.addObserver(this.#handleModelEvent);
   }
 
   init = () => {
     const prevFilterComponent = this.#filterComponent;
 
-    this.#filterComponent = new FilterView(this.#filterModel.filter);
+    this.#filterComponent = new FilterView(this.#filterModel.filter, !this.#pointModel.checkSomePointsInFuture());
     this.#filterComponent.setFilterTypeChangeHandler(this.#handleFilterTypeChange);
 
     if (prevFilterComponent === null) {
