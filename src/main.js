@@ -36,7 +36,12 @@ const handleNewPointButtonClick = () => {
 
 filterPresenter.init();
 pointListPresenter.init();
-Promise.all([pointsModel.init(), destinationsModel.init(), offersModel.init()]).finally(() => {
-  render(newTripPointComponent, tripContainerForHeaderElement);
-  newTripPointComponent.setClickHandler(handleNewPointButtonClick);
-});
+
+Promise.all([pointsModel.init(), destinationsModel.init(), offersModel.init()])
+  .then(() => {
+    render(newTripPointComponent, tripContainerForHeaderElement);
+    newTripPointComponent.setClickHandler(handleNewPointButtonClick);
+  })
+  .catch(() => {
+    pointListPresenter.changeLoadingToConnectionError();
+  });

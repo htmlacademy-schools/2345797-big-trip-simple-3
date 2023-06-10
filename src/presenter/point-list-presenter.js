@@ -9,6 +9,7 @@ import { sortPointDay, sortPointPrice } from '../utils/point';
 import { filter } from '../utils/filter';
 import PointNewPresenter from './point-new-presenter';
 import UiBlocker from '../framework/ui-blocker/ui-blocker.js';
+import ConnectionErrorView from '../view/error-view.js';
 
 const TimeLimit = {
   LOWER_LIMIT: 350,
@@ -18,6 +19,7 @@ const TimeLimit = {
 export default class PointListPresenter {
   #pointListComponent = new TripListView();
   #loadingComponent = new LoadingView();
+  #connectionErrorComponent = new ConnectionErrorView();
   #noPointComponent = null;
   #sortComponent = null;
   #pointListContainer = null;
@@ -29,6 +31,7 @@ export default class PointListPresenter {
   #pointNewPresenter = null;
   #createNewForm = false;
   #isLoading = true;
+  #isFail = false;
   #destinationsModel = null;
   #offersModel = null;
   #initCounter = 0;
@@ -148,6 +151,17 @@ export default class PointListPresenter {
     }
   };
 
+  #renderConnectionError = () => {
+    render(this.#connectionErrorComponent, this.#pointListContainer, RenderPosition.AFTERBEGIN);
+  };
+
+  changeLoadingToConnectionError = () => {
+    remove(this.#loadingComponent);
+    this.#renderConnectionError();
+    this.#isFail = true;
+    this.#isLoading = false;
+  };
+
   #handleSortTypeChange = (sortType) => {
     if (this.#currentSortType === sortType) {
       return;
@@ -186,6 +200,11 @@ export default class PointListPresenter {
 
     if (this.#isLoading) {
       this.#renderLoading();
+      return;
+    }
+
+    if (this.#isFail) {
+      this.#renderConnectionError();
       return;
     }
 
