@@ -14,7 +14,7 @@ export default class OffersModel extends Observable {
     try {
       this.#offers = await this.#tripPointApiService.offers;
     } catch(err) {
-      this.#offers = [];
+      throw new Error('Can\'t connect to get offers');
     }
     this._notify(UpdateType.INIT);
   }

@@ -14,7 +14,7 @@ export default class DestinationsModel extends Observable {
     try {
       this.#destinations = await this.#tripPointApiService.destinations;
     } catch(err) {
-      this.#destinations = [];
+      throw new Error('Can\'t connect to get destinations');
     }
     this._notify(UpdateType.INIT);
   }
